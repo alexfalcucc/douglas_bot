@@ -37,7 +37,7 @@ def handle(msg):
 
     if command.lower() in morning_words:
         bot.sendMessage(chat_id, "Good morning, {}!".format(name))
-    elif command == '@doguinha_bot data':
+    elif command == u'@doguinha_bot que dia \xe9 hoje?':
         day = datetime.datetime.now().day
         month = months.get(calendar.month_name[datetime.datetime.now().month], '')
         bot.sendMessage(chat_id, u"É dia de você calar essa boca. \n\nBrincadeira, hoje é dia {day} de {month} \U0001f605".format(day=day, month=month))
