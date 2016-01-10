@@ -51,6 +51,8 @@ def handle(msg):
         bot.sendMessage(chat_id, msg_wel)
         globals()['welcome_count'] += 1
         print globals()['welcome_count']
+    elif command.lower() == '@doguinha_bot eu te amo!':
+        bot.sendMessage(chat_id, u"Eu tambem amo vc, {} \u2764\ufe0f".format(name))
 
 bot = telepot.Bot('142375463:AAFf1mMbT1O3rxOCaQ8j0hzdU_Hc5Wh4kj0')
 bot.notifyOnMessage(handle)
