@@ -77,7 +77,12 @@ months = {
     'December': 'Dezembro'
 }
 
-ops = {"+": operator.add, "-": operator.sub, "*": operator.mul, "/": operator.div}
+ops = {
+    '+': operator.add,
+    '-': operator.sub,
+    '*': operator.mul,
+    '/': operator.div,
+}
 
 welcome_count = 0
 
