@@ -58,12 +58,17 @@ def handle(msg):
     elif command.lower() == '@doguinha_bot eu te amo!':
         bot.sendMessage(chat_id, u"Eu tambem amo vc, {} \u2764\ufe0f".format(name))
     elif command.lower() == u'@doguinha_bot que horas s\xe3o?':
-        msg = u"É muita hipocrisia da sua parte me perguntar isso, {}... "\
+        msg = u"É muita hipocrisia da sua parte me perguntar isso {}... "\
               u"Você pode vizualisar facilmente as horas olhando para parte "\
               u"inferior direita do seu comentário."
         bot.sendMessage(chat_id, msg.format(name))
         bot.sendChatAction(chat_id, 'upload_document')
         bot.sendDocument(chat_id, "BQADAQADEwADnqxzCGp0fqkzsPC6Ag")
+    elif command.lower() == u'@doguinha_bot n\xf3s te amamos!':
+        msg = u"Eu amo todos vocês! \u2764\ufe0f"
+        bot.sendMessage(chat_id, msg)
+        bot.sendChatAction(chat_id, 'upload_document')
+        bot.sendDocument(chat_id, "BQADBAADYwMAAiUcZAe1DjlP-IMGhQI")
 
 bot = telepot.Bot('142375463:AAFf1mMbT1O3rxOCaQ8j0hzdU_Hc5Wh4kj0')
 bot.notifyOnMessage(handle)
