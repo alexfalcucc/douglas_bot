@@ -38,7 +38,16 @@ night_words = [
     '@doguinha_bot boa noite',
 ]
 
-fuck_words = ['@doguinha_bot fuck', '@doguinha_bot fuck you']
+fuck_words = [
+    '@doguinha_bot fuck!',
+    '@doguinha_bot fuck',
+    '@doguinha_bot fuck you!',
+    '@doguinha_bot fuck you',
+    '@doguinha_bot fuck yourself!',
+    '@doguinha_bot fuck yourself',
+    '@doguinha_bot fuck u!',
+    '@doguinha_bot fuck u',
+]
 
 love_words = [
     '@doguinha_bot eu te amo!',
