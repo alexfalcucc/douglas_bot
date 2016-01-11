@@ -58,7 +58,7 @@ love_words = [
     '@doguinha_bot i love you!',
     '@doguinha_bot i lov you',
     '@doguinha_bot i lov you!',
-    '@doguinha_bot lov u'
+    '@doguinha_bot lov u',
     '@doguinha_bot lov u!'
 ]
 
@@ -160,6 +160,9 @@ def handle(msg):
         parse = command.split()
         op = parse.pop(2)
         bot.sendMessage(chat_id, u'\xae: {}'.format(ops[op](float(parse[1]), float(parse[2]))))
+    else:
+        msg = u"Normal né, pai."
+        bot.sendMessage(chat_id, msg)
 
 
 bot = telepot.Bot('142375463:AAFf1mMbT1O3rxOCaQ8j0hzdU_Hc5Wh4kj0')
