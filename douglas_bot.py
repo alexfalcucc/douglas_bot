@@ -24,6 +24,9 @@ months = {
     'December': 'Dezembro'
 }
 
+import operator
+ops = {"+": operator.add, "-": operator.sub, "*": operator.mul, "/": operator.div}
+
 welcome_count = 0
 
 
@@ -69,6 +72,14 @@ def handle(msg):
         bot.sendMessage(chat_id, msg)
         bot.sendChatAction(chat_id, 'upload_document')
         bot.sendDocument(chat_id, "BQADBAADYwMAAiUcZAe1DjlP-IMGhQI")
+    elif len(command.split()) == 4 and command.split()[2] in ops.keys():
+        """
+        please refactor with it: http://stackoverflow.com/questions/1740726/python-turn-string-into-operator
+        """
+        parse = command.split()
+        op = parse.pop(2)
+        bot.sendMessage(chat_id, u'\xae: {}'.format(ops[op](float(parse[1]), float(parse[2]))))
+
 
 bot = telepot.Bot('142375463:AAFf1mMbT1O3rxOCaQ8j0hzdU_Hc5Wh4kj0')
 bot.notifyOnMessage(handle)
