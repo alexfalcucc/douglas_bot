@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 """
 This it the douglas_bot's first version. So, we have to refactor it to a class skeleton.
 See more at: https://github.com/nickoala/telepot/blob/master/REFERENCE.md
@@ -23,6 +23,8 @@ __license__ = "MIT"
 morning_words = ['@doguinha_bot morning', '@doguinha_bot good morning']
 
 night_words = ['@doguinha_bot night', '@doguinha_bot good night']
+
+fuck_words = ['@doguinha_bot fuck', '@doguinha_bot fuck you']
 
 months = {
     'January': 'Janeiro',
@@ -63,7 +65,8 @@ def handle(msg):
     elif command == u'@doguinha_bot que dia \xe9 hoje?':
         day = datetime.datetime.now().day
         month = months.get(calendar.month_name[datetime.datetime.now().month], '')
-        bot.sendMessage(chat_id, u"É dia de você calar essa boca. \n\nBrincadeira, hoje é dia {day} de {month} \U0001f605".format(day=day, month=month))
+        bot.sendMessage(
+            chat_id, u"É dia de você calar essa boca. \n\nBrincadeira, hoje é dia {day} de {month} \U0001f605".format(day=day, month=month))
     elif command == '@doguinha_bot bem vindo!':
         if welcome_count < 1:
             msg_wel = u"Eu sempre estive aqui, idiota! \U0001f610"
@@ -88,6 +91,19 @@ def handle(msg):
         bot.sendMessage(chat_id, msg)
         bot.sendChatAction(chat_id, 'upload_document')
         bot.sendDocument(chat_id, "BQADBAADYwMAAiUcZAe1DjlP-IMGhQI")
+    elif command.lower() in fuck_words:
+        msg = [
+            u"Querido, por favor! Tenha boas maneiras! Você tem que me convidar pra jantar primeiro.",
+            u"Entre na fila.",
+            u"Sonhando novamente, querido?",
+            u"Se sentindo sozinho de novo, ha?",
+            u"É só eu ou você diz isso para todos?",
+            u"Sério? Agora?",
+            u"Não obrigado. Eu passo.",
+        ]
+        bot.sendMessage(chat_id, random.choice(msg))
+        # bot.sendChatAction(chat_id, 'upload_document')
+        # bot.sendDocument(chat_id, "BQADBAADdwMAAgMdZAdPtWmOPGN1IQI")
     elif len(command.split()) == 4 and command.split()[2] in ops.keys():
         """
         please refactor with it: http://stackoverflow.com/questions/1740726/python-turn-string-into-operator
