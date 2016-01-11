@@ -6,8 +6,13 @@ import random
 import datetime
 import telepot
 import calendar
+import operator
+import schedule
+# from jobs import job
 
 morning_words = ['@doguinha_bot morning', '@doguinha_bot good morning']
+
+night_words = ['@doguinha_bot night', '@doguinha_bot good night']
 
 months = {
     'January': 'Janeiro',
@@ -24,7 +29,6 @@ months = {
     'December': 'Dezembro'
 }
 
-import operator
 ops = {"+": operator.add, "-": operator.sub, "*": operator.mul, "/": operator.div}
 
 welcome_count = 0
@@ -44,6 +48,8 @@ def handle(msg):
 
     if command.lower() in morning_words:
         bot.sendMessage(chat_id, "Good morning, {}!".format(name))
+    elif command.lower() in night_words:
+        bot.sendMessage(chat_id, "Good night, {}!".format(name))
     elif command == u'@doguinha_bot que dia \xe9 hoje?':
         day = datetime.datetime.now().day
         month = months.get(calendar.month_name[datetime.datetime.now().month], '')
@@ -85,5 +91,15 @@ bot = telepot.Bot('142375463:AAFf1mMbT1O3rxOCaQ8j0hzdU_Hc5Wh4kj0')
 bot.notifyOnMessage(handle)
 print 'I am listening ...'
 
+
+def job():
+    print("Sending message...")
+    msg = "Hora de ir dormir. Boa noite à todos!"
+    bot.sendMessage("-58208727", msg)
+    bot.sendChatAction("-58208727", 'upload_document')
+    bot.sendDocument("-58208727", "BQADBAADeQMAAqwbZAeNjNm2fzVR0wI")
+
+schedule.every().day.at("00:00").do(job)
 while 1:
+    schedule.run_pending()
     time.sleep(10)
