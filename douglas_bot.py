@@ -20,11 +20,38 @@ __maintainer__ = "Alexsander Falcucci"
 __license__ = "MIT"
 
 
-morning_words = ['@doguinha_bot morning', '@doguinha_bot good morning']
+morning_words = [
+    '@doguinha_bot morning!',
+    '@doguinha_bot morning',
+    '@doguinha_bot good morning!',
+    '@doguinha_bot good morning',
+    '@doguinha_bot bom dia',
+    '@doguinha_bot bom dia!',
+]
 
-night_words = ['@doguinha_bot night', '@doguinha_bot good night']
+night_words = [
+    '@doguinha_bot night!',
+    '@doguinha_bot night',
+    '@doguinha_bot good night!',
+    '@doguinha_bot good night',
+    '@doguinha_bot boa noite!',
+    '@doguinha_bot boa noite',
+]
 
 fuck_words = ['@doguinha_bot fuck', '@doguinha_bot fuck you']
+
+love_words = [
+    '@doguinha_bot eu te amo!',
+    '@doguinha_bot eu te amo',
+    '@doguinha_bot te amo!',
+    '@doguinha_bot te amo',
+    '@doguinha_bot i love you',
+    '@doguinha_bot i love you!',
+    '@doguinha_bot i lov you',
+    '@doguinha_bot i lov you!',
+    '@doguinha_bot lov u'
+    '@doguinha_bot lov u!'
+]
 
 months = {
     'January': 'Janeiro',
@@ -77,7 +104,7 @@ def handle(msg):
         bot.sendMessage(chat_id, msg_wel)
         globals()['welcome_count'] += 1
         print globals()['welcome_count']
-    elif command.lower() == '@doguinha_bot eu te amo!':
+    elif command.lower() in love_words:
         msgs = [
             u"Eu tambem amo vc, {} \u2764\ufe0f".format(name),
             "Legal.",
