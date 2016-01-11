@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
+"""
+This it the douglas_bot's first version. So, we have to refactor it to a class skeleton.
+See more at: https://github.com/nickoala/telepot/blob/master/REFERENCE.md
+"""
 import sys
 import time
 import random
@@ -9,6 +13,12 @@ import calendar
 import operator
 import schedule
 # from jobs import job
+
+__author__ = "Alexsander Falcucci"
+__email__ = "alex.falcucci@gmail.com"
+__maintainer__ = "Alexsander Falcucci"
+__license__ = "MIT"
+
 
 morning_words = ['@doguinha_bot morning', '@doguinha_bot good morning']
 
@@ -94,7 +104,7 @@ print 'I am listening ...'
 
 def job():
     print("Sending message...")
-    msg = "Hora de ir dormir. Boa noite à todos!"
+    msg = "Boa noite à todos!"
     bot.sendMessage("-58208727", msg)
     bot.sendChatAction("-58208727", 'upload_document')
     bot.sendDocument("-58208727", "BQADBAADeQMAAqwbZAeNjNm2fzVR0wI")
