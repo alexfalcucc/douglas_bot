@@ -78,7 +78,15 @@ def handle(msg):
         globals()['welcome_count'] += 1
         print globals()['welcome_count']
     elif command.lower() == '@doguinha_bot eu te amo!':
-        bot.sendMessage(chat_id, u"Eu tambem amo vc, {} \u2764\ufe0f".format(name))
+        msgs = [
+            u"Eu tambem amo vc, {} \u2764\ufe0f".format(name),
+            "Legal.",
+        ]
+        msg = random.choice(msgs)
+        bot.sendMessage(chat_id, msg)
+        if msg == "Legal.":
+            bot.sendChatAction(chat_id, 'upload_document')
+            bot.sendDocument(chat_id, "BQADBAADdwMAAgMdZAdPtWmOPGN1IQI")
     elif command.lower() == u'@doguinha_bot que horas s\xe3o?':
         msg = u"É muita hipocrisia da sua parte me perguntar isso {}... "\
               u"Você pode vizualisar facilmente as horas olhando para parte "\
