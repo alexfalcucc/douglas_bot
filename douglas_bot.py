@@ -148,6 +148,9 @@ def handle(msg):
     elif command.lower() == u'@doguinha_bot \xc9 bininu binina ou binunu binino?'.lower():
         msg = "bininu."
         bot.sendMessage(chat_id, msg)
+    elif command.lower() == '@doguinha_bot qual sua idade?':
+        msg = "Você sabe a idade de Deus, seu criador? Pois é, sou 1 ano mais novo que Ele."
+        bot.sendMessage(chat_id, msg)
     elif command.lower() in fuck_words:
         msg = [
             u"Querido, por favor! Tenha boas maneiras! Você tem que me convidar pra jantar primeiro.",
