@@ -183,7 +183,13 @@ def job():
     msg = "Boa noite à todos!"
     bot.sendMessage("-58208727", msg)
     bot.sendChatAction("-58208727", 'upload_document')
-    bot.sendDocument("-58208727", "BQADBAADeQMAAqwbZAeNjNm2fzVR0wI")
+    gifs = [
+        'BQADBAADeQMAAqwbZAeNjNm2fzVR0wI',
+        'BQADBAADEgMAAnwYZAdLuk2uOkqL2gI',
+        'BQADBAADSwMAAoQYZAevJ86wPaeRxwI',
+        'BQADBAADuwMAAj8bZAfJzPzXdPh7jwI',
+    ]
+    bot.sendDocument("-58208727", random.choice(gifs))
 
 schedule.every().day.at("00:00").do(job)
 while 1:
