@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This it the douglas_bot's first version. So, we have to refactor it to a class skeleton.
+This it's the douglas_bot's first version. So, we have to refactor it to a class skeleton.
 See more at: https://github.com/nickoala/telepot/blob/master/REFERENCE.md
 """
 import sys
@@ -88,6 +88,11 @@ welcome_count = 0
 
 
 def handle(msg):
+    """
+    Just do the actions for each command listed in the conditions.
+    We have to refactor it puting all commands at a tuple or list, etc.
+    The bot username will be dinamically alterable, too.
+    """
     command = ''
     print msg
     content_type, chat_type, chat_id = telepot.glance2(msg)
@@ -140,6 +145,9 @@ def handle(msg):
         bot.sendMessage(chat_id, msg)
         bot.sendChatAction(chat_id, 'upload_document')
         bot.sendDocument(chat_id, "BQADBAADYwMAAiUcZAe1DjlP-IMGhQI")
+    elif command.lower() == u'@doguinha_bot \xc9 bininu binina ou binunu binino?'.lower():
+        msg = "bininu."
+        bot.sendMessage(chat_id, msg)
     elif command.lower() in fuck_words:
         msg = [
             u"Querido, por favor! Tenha boas maneiras! Você tem que me convidar pra jantar primeiro.",
