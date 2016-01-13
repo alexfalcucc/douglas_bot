@@ -173,7 +173,7 @@ def handle(msg):
         op = parse.pop(2)
         bot.sendMessage(chat_id, u'\xae: {}'.format(ops[op](float(parse[1]), float(parse[2]))))
     else:
-        ed_response = get_ed_reply(command)
+        ed_response = get_ed_reply(command.encode('utf-8'))
         bot.sendMessage(chat_id, ed_response)
 
 

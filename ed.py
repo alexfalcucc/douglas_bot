@@ -1,9 +1,13 @@
 #!/usr/bin/env python
-# encoding: utf-8
+# -*- coding: utf-8 -*-
 #
 # Robô Ed Telegram Bot
 # This program is dedicated to the public domain under the CC0 license.
 import urllib3
+import re
+
+# Regular Expression to remove html tags r'<\/?\w+\s*[^>]*?\/?>'
+pattern = re.compile(u'<\/?\w+\s*[^>]*?\/?>', re.DOTALL | re.MULTILINE | re.IGNORECASE | re.UNICODE)
 
 
 def get_ed_reply(text):
@@ -11,4 +15,6 @@ def get_ed_reply(text):
     url = ("http://www.ed.conpet.gov.br/mod_perl/bot_gateway.cgi?server=0.0.0.0"
            "%3A8085&charset_post=utf-8&charset=utf-8&pure=1&js=0&tst=1&msg=") + text
     r = http.request('GET', url)
-    return r.data.strip()
+    text = r.data.strip()
+    reply_text = pattern.sub(" ", text)
+    return reply_text
