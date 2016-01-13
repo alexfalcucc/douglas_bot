@@ -101,7 +101,8 @@ def handle(msg):
     if content_type == 'text':
         command = msg['text']
 
-    name = msg['from']['first_name']
+    unicode_name = msg['from']['first_name']
+    name = unicode_name.encode('utf-8')
 
     print 'Got command: %s' % command
 
