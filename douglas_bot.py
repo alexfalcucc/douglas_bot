@@ -13,6 +13,7 @@ import calendar
 import operator
 import schedule
 from ed import get_ed_reply
+from utils.utils import utf8_encode
 # from jobs import job
 
 __author__ = "Alexsander Falcucci"
@@ -101,8 +102,7 @@ def handle(msg):
     if content_type == 'text':
         command = msg['text']
 
-    unicode_name = msg['from']['first_name']
-    name = unicode_name.encode('utf-8')
+    name = utf8_encode(msg['from']['first_name'])
 
     print 'Got command: %s' % command
 
@@ -174,7 +174,7 @@ def handle(msg):
         op = parse.pop(2)
         bot.sendMessage(chat_id, u'\xae: {}'.format(ops[op](float(parse[1]), float(parse[2]))))
     else:
-        ed_response = get_ed_reply(command.encode('utf-8'))
+        ed_response = get_ed_reply(utf8_encode(command))
         bot.sendMessage(chat_id, ed_response)
 
 
