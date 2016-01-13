@@ -12,6 +12,7 @@ import telepot
 import calendar
 import operator
 import schedule
+from ed import get_ed_reply
 # from jobs import job
 
 __author__ = "Alexsander Falcucci"
@@ -172,8 +173,8 @@ def handle(msg):
         op = parse.pop(2)
         bot.sendMessage(chat_id, u'\xae: {}'.format(ops[op](float(parse[1]), float(parse[2]))))
     else:
-        msg = u"Normal né, pai."
-        bot.sendMessage(chat_id, msg)
+        ed_response = get_ed_reply(command)
+        bot.sendMessage(chat_id, ed_response)
 
 
 bot = telepot.Bot('142375463:AAFf1mMbT1O3rxOCaQ8j0hzdU_Hc5Wh4kj0')
