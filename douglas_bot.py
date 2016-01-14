@@ -56,6 +56,7 @@ fuck_words = [
     'vai se fuder!',
     'foda-se',
     'foda-se!',
+    'vsf',
 ]
 
 love_words = [
@@ -98,6 +99,7 @@ ops = {
 welcome_count = 0
 
 bot_names = [
+    ', dog',
     'dog, ',
     ' dog,',
     'dog,',
@@ -150,12 +152,12 @@ def handle(msg):
             bot.sendMessage(chat_id, "Good morning, {}!".format(name))
         elif command.lower() in night_words:
             bot.sendMessage(chat_id, "Good night, {}!".format(name))
-        elif command == '@doguinha_bot que dia é hoje?':
+        elif command == 'que dia é hoje?':
             day = datetime.datetime.now().day
             month = months.get(calendar.month_name[datetime.datetime.now().month], '')
             bot.sendMessage(
                 chat_id, "É dia de você calar essa boca. \n\nBrincadeira, hoje é dia {day} de {month} \U0001f605".format(day=day, month=month))
-        elif command == '@doguinha_bot bem vindo!':
+        elif command == 'bem vindo!':
             if welcome_count < 1:
                 msg_wel = "Eu sempre estive aqui, idiota! \U0001f610"
             elif welcome_count == 1:
@@ -223,6 +225,8 @@ def handle(msg):
         else:
             ed_response = get_ed_reply(command)
             bot.sendMessage(chat_id, ed_response)
+    elif command.lower() in 'kkk'*15:
+            bot.sendMessage(chat_id, "kkkkkkkkkkkk")
 
 
 bot = telepot.Bot('142375463:AAFf1mMbT1O3rxOCaQ8j0hzdU_Hc5Wh4kj0')
