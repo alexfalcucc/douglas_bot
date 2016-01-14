@@ -51,6 +51,10 @@ fuck_words = [
     'fuck yourself',
     'fuck u!',
     'fuck u',
+    'vai se fuder',
+    'vai se fuder!',
+    'foda-se',
+    'foda-se!',
 ]
 
 love_words = [
