@@ -89,12 +89,17 @@ ops = {
 welcome_count = 0
 
 
+def call_bot(names, text):
+    return [name for name in names if name in utf8_encode(text)]
+
+
 def handle(msg):
     """
     Just do the actions for each command listed in the conditions.
     We have to refactor it puting all commands at a tuple or list, etc.
     The bot username will be dinamically alterable, too.
     """
+    global bot_names
     command = ''
     print msg
     content_type, chat_type, chat_id = telepot.glance2(msg)
@@ -106,76 +111,77 @@ def handle(msg):
 
     print 'Got command: %s' % command
 
-    if command.lower() in morning_words:
-        bot.sendMessage(chat_id, "Good morning, {}!".format(name))
-    elif command.lower() in night_words:
-        bot.sendMessage(chat_id, "Good night, {}!".format(name))
-    elif command == u'@doguinha_bot que dia \xe9 hoje?':
-        day = datetime.datetime.now().day
-        month = months.get(calendar.month_name[datetime.datetime.now().month], '')
-        bot.sendMessage(
-            chat_id, u"É dia de você calar essa boca. \n\nBrincadeira, hoje é dia {day} de {month} \U0001f605".format(day=day, month=month))
-    elif command == '@doguinha_bot bem vindo!':
-        if welcome_count < 1:
-            msg_wel = u"Eu sempre estive aqui, idiota! \U0001f610"
-        elif welcome_count == 1:
-            msg_wel = u"Não repito. \U0001f48b"
-        else:
-            msg_wel = u"\U0001f610"
-        bot.sendMessage(chat_id, msg_wel)
-        globals()['welcome_count'] += 1
-        print globals()['welcome_count']
-    elif command.lower() in love_words:
-        msgs = [
-            u"Eu tambem amo vc, {} \u2764\ufe0f".format(name),
-            "Legal.",
-        ]
-        msg = random.choice(msgs)
-        bot.sendMessage(chat_id, msg)
-        if msg == "Legal.":
+    if call_bot(bot_names, command.lower()):
+        if command.lower() in morning_words:
+            bot.sendMessage(chat_id, "Good morning, {}!".format(name))
+        elif command.lower() in night_words:
+            bot.sendMessage(chat_id, "Good night, {}!".format(name))
+        elif command == u'@doguinha_bot que dia \xe9 hoje?':
+            day = datetime.datetime.now().day
+            month = months.get(calendar.month_name[datetime.datetime.now().month], '')
+            bot.sendMessage(
+                chat_id, u"É dia de você calar essa boca. \n\nBrincadeira, hoje é dia {day} de {month} \U0001f605".format(day=day, month=month))
+        elif command == '@doguinha_bot bem vindo!':
+            if welcome_count < 1:
+                msg_wel = u"Eu sempre estive aqui, idiota! \U0001f610"
+            elif welcome_count == 1:
+                msg_wel = u"Não repito. \U0001f48b"
+            else:
+                msg_wel = u"\U0001f610"
+            bot.sendMessage(chat_id, msg_wel)
+            globals()['welcome_count'] += 1
+            print globals()['welcome_count']
+        elif command.lower() in love_words:
+            msgs = [
+                u"Eu tambem amo vc, {} \u2764\ufe0f".format(name),
+                "Legal.",
+            ]
+            msg = random.choice(msgs)
+            bot.sendMessage(chat_id, msg)
+            if msg == "Legal.":
+                bot.sendChatAction(chat_id, 'upload_document')
+                bot.sendDocument(chat_id, "BQADBAADdwMAAgMdZAdPtWmOPGN1IQI")
+        elif command.lower() == u'@doguinha_bot que horas s\xe3o?':
+            msg = u"É muita hipocrisia da sua parte me perguntar isso {}... "\
+                  u"Você pode vizualisar facilmente as horas olhando para parte "\
+                  u"inferior direita do seu comentário."
+            bot.sendMessage(chat_id, msg.format(name))
             bot.sendChatAction(chat_id, 'upload_document')
-            bot.sendDocument(chat_id, "BQADBAADdwMAAgMdZAdPtWmOPGN1IQI")
-    elif command.lower() == u'@doguinha_bot que horas s\xe3o?':
-        msg = u"É muita hipocrisia da sua parte me perguntar isso {}... "\
-              u"Você pode vizualisar facilmente as horas olhando para parte "\
-              u"inferior direita do seu comentário."
-        bot.sendMessage(chat_id, msg.format(name))
-        bot.sendChatAction(chat_id, 'upload_document')
-        bot.sendDocument(chat_id, "BQADAQADEwADnqxzCGp0fqkzsPC6Ag")
-    elif command.lower() == u'@doguinha_bot n\xf3s te amamos!':
-        msg = u"Eu amo todos vocês! \u2764\ufe0f"
-        bot.sendMessage(chat_id, msg)
-        bot.sendChatAction(chat_id, 'upload_document')
-        bot.sendDocument(chat_id, "BQADBAADYwMAAiUcZAe1DjlP-IMGhQI")
-    elif command.lower() == u'@doguinha_bot \xc9 bininu binina ou binunu binino?'.lower():
-        msg = "bininu."
-        bot.sendMessage(chat_id, msg)
-    elif command.lower() == '@doguinha_bot qual sua idade?':
-        msg = "Você sabe a idade de Deus, seu criador? Pois é, sou 1 ano mais novo que Ele."
-        bot.sendMessage(chat_id, msg)
-    elif command.lower() in fuck_words:
-        msg = [
-            u"Querido, por favor! Tenha boas maneiras! Você tem que me convidar pra jantar primeiro.",
-            u"Entre na fila.",
-            u"Sonhando novamente, querido?",
-            u"Se sentindo sozinho de novo, ha?",
-            u"É só eu ou você diz isso para todos?",
-            u"Sério? Agora?",
-            u"Não obrigado. Eu passo.",
-        ]
-        bot.sendMessage(chat_id, random.choice(msg))
-        # bot.sendChatAction(chat_id, 'upload_document')
-        # bot.sendDocument(chat_id, "BQADBAADdwMAAgMdZAdPtWmOPGN1IQI")
-    elif len(command.split()) == 4 and command.split()[2] in ops.keys():
-        """
-        please refactor with it: http://stackoverflow.com/questions/1740726/python-turn-string-into-operator
-        """
-        parse = command.split()
-        op = parse.pop(2)
-        bot.sendMessage(chat_id, u'\xae: {}'.format(ops[op](float(parse[1]), float(parse[2]))))
-    else:
-        ed_response = get_ed_reply(utf8_encode(command))
-        bot.sendMessage(chat_id, ed_response)
+            bot.sendDocument(chat_id, "BQADAQADEwADnqxzCGp0fqkzsPC6Ag")
+        elif command.lower() == u'@doguinha_bot n\xf3s te amamos!':
+            msg = u"Eu amo todos vocês! \u2764\ufe0f"
+            bot.sendMessage(chat_id, msg)
+            bot.sendChatAction(chat_id, 'upload_document')
+            bot.sendDocument(chat_id, "BQADBAADYwMAAiUcZAe1DjlP-IMGhQI")
+        elif command.lower() == u'@doguinha_bot \xc9 bininu binina ou binunu binino?'.lower():
+            msg = "bininu."
+            bot.sendMessage(chat_id, msg)
+        elif command.lower() == '@doguinha_bot qual sua idade?':
+            msg = "Você sabe a idade de Deus, seu criador? Pois é, sou 1 ano mais novo que Ele."
+            bot.sendMessage(chat_id, msg)
+        elif command.lower() in fuck_words:
+            msg = [
+                u"Querido, por favor! Tenha boas maneiras! Você tem que me convidar pra jantar primeiro.",
+                u"Entre na fila.",
+                u"Sonhando novamente, querido?",
+                u"Se sentindo sozinho de novo, ha?",
+                u"É só eu ou você diz isso para todos?",
+                u"Sério? Agora?",
+                u"Não obrigado. Eu passo.",
+            ]
+            bot.sendMessage(chat_id, random.choice(msg))
+            # bot.sendChatAction(chat_id, 'upload_document')
+            # bot.sendDocument(chat_id, "BQADBAADdwMAAgMdZAdPtWmOPGN1IQI")
+        elif len(command.split()) == 4 and command.split()[2] in ops.keys():
+            """
+            please refactor with it: http://stackoverflow.com/questions/1740726/python-turn-string-into-operator
+            """
+            parse = command.split()
+            op = parse.pop(2)
+            bot.sendMessage(chat_id, u'\xae: {}'.format(ops[op](float(parse[1]), float(parse[2]))))
+        else:
+            ed_response = get_ed_reply(utf8_encode(command))
+            bot.sendMessage(chat_id, ed_response)
 
 
 bot = telepot.Bot('142375463:AAFf1mMbT1O3rxOCaQ8j0hzdU_Hc5Wh4kj0')
