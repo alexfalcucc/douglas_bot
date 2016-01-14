@@ -17,4 +17,4 @@ def get_ed_reply(text):
     r = http.request('GET', url)
     text = r.data.strip()
     reply_text = pattern.sub(" ", text)
-    return reply_text
+    return reply_text if r.status == 200 else 'Desculpe, não entendi.'
