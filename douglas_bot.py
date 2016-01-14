@@ -25,45 +25,47 @@ __license__ = "MIT"
 
 
 morning_words = [
-    '@doguinha_bot morning!',
-    '@doguinha_bot morning',
-    '@doguinha_bot good morning!',
-    '@doguinha_bot good morning',
-    '@doguinha_bot bom dia',
-    '@doguinha_bot bom dia!',
+    'morning!',
+    'morning',
+    'good morning!',
+    'good morning',
+    'bom dia',
+    'bom dia!',
 ]
 
 night_words = [
-    '@doguinha_bot night!',
-    '@doguinha_bot night',
-    '@doguinha_bot good night!',
-    '@doguinha_bot good night',
-    '@doguinha_bot boa noite!',
-    '@doguinha_bot boa noite',
+    'night!',
+    'night',
+    'good night!',
+    'good night',
+    'boa noite!',
+    'boa noite',
 ]
 
 fuck_words = [
-    '@doguinha_bot fuck!',
-    '@doguinha_bot fuck',
-    '@doguinha_bot fuck you!',
-    '@doguinha_bot fuck you',
-    '@doguinha_bot fuck yourself!',
-    '@doguinha_bot fuck yourself',
-    '@doguinha_bot fuck u!',
-    '@doguinha_bot fuck u',
+    'fuck!',
+    'fuck',
+    'fuck you!',
+    'fuck you',
+    'fuck yourself!',
+    'fuck yourself',
+    'fuck u!',
+    'fuck u',
 ]
 
 love_words = [
-    '@doguinha_bot eu te amo!',
-    '@doguinha_bot eu te amo',
-    '@doguinha_bot te amo!',
-    '@doguinha_bot te amo',
-    '@doguinha_bot i love you',
-    '@doguinha_bot i love you!',
-    '@doguinha_bot i lov you',
-    '@doguinha_bot i lov you!',
-    '@doguinha_bot lov u',
-    '@doguinha_bot lov u!'
+    'eu te amo!',
+    'eu te amo',
+    'te amo!',
+    'te amo',
+    'i love you',
+    'i love you!',
+    'i lov you',
+    'i lov you!',
+    'lov u',
+    'lov u!',
+    'i lov u',
+    'i lov u!'
 ]
 
 months = {
