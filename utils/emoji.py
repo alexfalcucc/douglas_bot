@@ -21,6 +21,7 @@
 
 """This module contains a object that represents an Emoji"""
 
+import inspect
 from future.utils import bytes_to_native_str as n
 
 
@@ -879,3 +880,29 @@ class Emoji(object):
     CLOCK_FACE_TEN_THIRTY = n(b'\xF0\x9F\x95\xA5')
     CLOCK_FACE_ELEVEN_THIRTY = n(b'\xF0\x9F\x95\xA6')
     CLOCK_FACE_TWELVE_THIRTY = n(b'\xF0\x9F\x95\xA7')
+
+
+def get_all_emojis():
+    qty_emojis = len(inspect.getmembers(Emoji, predicate=inspect.attrgetter))/5
+    emojis1 = dict((emoji, value) for (emoji, value) in
+                   inspect.getmembers(Emoji, predicate=inspect.attrgetter)[:qty_emojis]
+                   if not emoji.startswith('__'))
+
+    emojis2 = dict((emoji, value) for (emoji, value) in
+                   inspect.getmembers(Emoji, predicate=inspect.attrgetter)[qty_emojis:qty_emojis*2]
+                   if not emoji.startswith('__'))
+    emojis3 = dict((emoji, value) for (emoji, value) in
+                   inspect.getmembers(Emoji, predicate=inspect.attrgetter)[qty_emojis*2:qty_emojis*3]
+                   if not emoji.startswith('__'))
+    emojis4 = dict((emoji, value) for (emoji, value) in
+                   inspect.getmembers(Emoji, predicate=inspect.attrgetter)[qty_emojis*3:qty_emojis*4]
+                   if not emoji.startswith('__'))
+    emojis5 = dict((emoji, value) for (emoji, value) in
+                   inspect.getmembers(Emoji, predicate=inspect.attrgetter)[qty_emojis*4:qty_emojis*5]
+                   if not emoji.startswith('__'))
+    msg1 = ' '.join(['%s: %s' % (key, value) for (key, value) in emojis1.items()])
+    msg2 = ' '.join(['%s: %s' % (key, value) for (key, value) in emojis2.items()])
+    msg3 = ' '.join(['%s: %s' % (key, value) for (key, value) in emojis3.items()])
+    msg4 = ' '.join(['%s: %s' % (key, value) for (key, value) in emojis4.items()])
+    msg5 = ' '.join(['%s: %s' % (key, value) for (key, value) in emojis5.items()])
+    return msg1, msg2, msg3, msg4, msg5

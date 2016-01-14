@@ -15,6 +15,7 @@ import operator
 import schedule
 from external.ed import get_ed_reply
 from utils.utils import utf8_encode, remove_bot_name
+from utils.emoji import Emoji, get_all_emojis
 from jobs import good_night_cron_job
 # from jobs import job
 
@@ -174,24 +175,31 @@ def handle(msg):
             if msg == "Legal.":
                 bot.sendChatAction(chat_id, 'upload_document')
                 bot.sendDocument(chat_id, "BQADBAADdwMAAgMdZAdPtWmOPGN1IQI")
-        elif command.lower() == '@doguinha_bot que horas são?':
+        elif command.lower() == 'que horas são?':
             msg = "É muita hipocrisia da sua parte me perguntar isso {}... "\
                   "Você pode vizualisar facilmente as horas olhando para parte "\
                   "inferior direita do seu comentário."
             bot.sendMessage(chat_id, msg.format(name))
             bot.sendChatAction(chat_id, 'upload_document')
             bot.sendDocument(chat_id, "BQADAQADEwADnqxzCGp0fqkzsPC6Ag")
-        elif command.lower() == '@doguinha_bot n\xf3s te amamos!':
+        elif command.lower() == 'nós te amamos!':
             msg = "Eu amo todos vocês! \u2764\ufe0f"
             bot.sendMessage(chat_id, msg)
             bot.sendChatAction(chat_id, 'upload_document')
             bot.sendDocument(chat_id, "BQADBAADYwMAAiUcZAe1DjlP-IMGhQI")
-        elif command.lower() == '@doguinha_bot é bininu binina ou binunu binino?'.lower():
+        elif command.lower() == 'é bininu binina ou binunu binino?'.lower():
             msg = "bininu."
             bot.sendMessage(chat_id, msg)
-        elif command.lower() == '@doguinha_bot qual sua idade?':
+        elif command.lower() == 'qual sua idade?':
             msg = "Você sabe a idade de Deus, seu criador? Pois é, sou 1 ano mais novo que Ele."
             bot.sendMessage(chat_id, msg)
+        elif command.lower() == '/emojis':
+            msg1, msg2, msg3, msg4, msg5 = get_all_emojis()
+            bot.sendMessage(chat_id, msg1)
+            bot.sendMessage(chat_id, msg2)
+            bot.sendMessage(chat_id, msg3)
+            bot.sendMessage(chat_id, msg4)
+            bot.sendMessage(chat_id, msg5)
         elif command.lower() in fuck_words:
             msg = [
                 "Querido, por favor! Tenha boas maneiras! Você tem que me convidar pra jantar primeiro.",
