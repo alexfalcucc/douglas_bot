@@ -93,6 +93,9 @@ ops = {
 welcome_count = 0
 
 bot_names = [
+    'dog, ',
+    ' dog,',
+    'dog,',
     ' dogão',
     'dogão ',
     'doguinha',
