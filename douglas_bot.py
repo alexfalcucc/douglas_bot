@@ -90,7 +90,21 @@ ops = {
 
 welcome_count = 0
 
-bot_names = [' dogão', 'dogão ', 'doguinha', ' doguinha', 'doguinha ', ' dog', 'dog ', ' rei', 'rei ', ' mestre', 'mestre ', '@doguinha_bot ', ' @doguinha_bot']
+bot_names = [
+    ' dogão',
+    'dogão ',
+    'doguinha',
+    ' doguinha',
+    'doguinha ',
+    ' dog',
+    'dog ',
+    ' rei',
+    'rei ',
+    ' mestre',
+    'mestre ',
+    '@doguinha_bot ',
+    ' @doguinha_bot',
+]
 
 
 def call_bot(names, text):
