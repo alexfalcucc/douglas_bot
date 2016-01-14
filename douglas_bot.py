@@ -226,7 +226,7 @@ def handle(msg):
             ed_response = get_ed_reply(command)
             bot.sendMessage(chat_id, ed_response)
     elif command.lower() in 'kkk'*15:
-            bot.sendMessage(chat_id, "kkkkkkkkkkkk")
+            bot.sendMessage(chat_id, "kkkk")
 
 
 bot = telepot.Bot('142375463:AAFf1mMbT1O3rxOCaQ8j0hzdU_Hc5Wh4kj0')
