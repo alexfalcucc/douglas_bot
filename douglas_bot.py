@@ -13,6 +13,7 @@ import telepot
 import calendar
 import operator
 import schedule
+import pickledb 
 from external.ed import get_ed_reply
 from utils.utils import utf8_encode, remove_bot_name
 from utils.emoji import Emoji, get_all_emojis
@@ -23,6 +24,9 @@ __author__ = "Alexsander Falcucci"
 __email__ = "alex.falcucci@gmail.com"
 __maintainer__ = "Alexsander Falcucci"
 __license__ = "MIT"
+
+
+db = pickledb.load('douglas.db', True)
 
 
 morning_words = [
@@ -224,6 +228,21 @@ def handle(msg):
             bot.sendMessage(chat_id, '\xae: {}'.format(ops[op](float(parse[1]), float(parse[2]))))
         else:
             ed_response = get_ed_reply(command)
+            if verify_text(['Fui criado e program', 'O meu inventor'], ed_response):
+                developed_by_texts = db.get('developed_by')
+                olds = [utf8_encode(text) for text in developed_by_texts['old']]
+                news = [utf8_encode(text) for text in developed_by_texts['new']]
+                if 'Fui criado e program' in ed_response:
+                    print olds
+                    print news
+                    ed_response = ed_response.replace(
+                            olds[0],
+                            news[0])
+                if 'O meu inventor' in ed_response:
+                    ed_response = ed_response.replace(
+                            olds[1],
+                            news[1])
+                ed_response += ' {}'.format(Emoji.GRINNING_FACE)
             bot.sendMessage(chat_id, ed_response)
     elif verify_text(command.lower().split(), 'kkk'*15):
             msgs = [
