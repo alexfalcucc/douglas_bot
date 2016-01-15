@@ -238,11 +238,11 @@ def handle(msg):
                     ed_response = ed_response.replace(
                             olds[0],
                             news[0])
+                    ed_response += ' {}'.format(Emoji.GRINNING_FACE)
                 if 'O meu inventor' in ed_response:
                     ed_response = ed_response.replace(
                             olds[1],
                             news[1])
-                    ed_response += ' {}'.format(Emoji.GRINNING_FACE)
             bot.sendMessage(chat_id, ed_response)
     elif verify_text(command.lower().split(), 'kkk'*15):
             msgs = [
