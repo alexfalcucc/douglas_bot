@@ -228,13 +228,12 @@ def handle(msg):
             bot.sendMessage(chat_id, '\xae: {}'.format(ops[op](float(parse[1]), float(parse[2]))))
         else:
             ed_response = get_ed_reply(command)
+
             if verify_text(['Fui criado e program', 'O meu inventor'], ed_response):
                 developed_by_texts = db.get('developed_by')
                 olds = [utf8_encode(text) for text in developed_by_texts['old']]
                 news = [utf8_encode(text) for text in developed_by_texts['new']]
                 if 'Fui criado e program' in ed_response:
-                    print olds
-                    print news
                     ed_response = ed_response.replace(
                             olds[0],
                             news[0])
@@ -252,7 +251,7 @@ def handle(msg):
             bot.sendMessage(chat_id, random.choice(msgs))
 
 
-bot = telepot.Bot('142375463:AAFf1mMbT1O3rxOCaQ8j0hzdU_Hc5Wh4kj0')
+bot = telepot.Bot(db.get('TOKEN'))
 bot.notifyOnMessage(handle)
 print 'I am listening ...'
 
