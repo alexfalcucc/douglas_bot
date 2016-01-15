@@ -1,3 +1,6 @@
+import datetime
+
+
 class Temperature(object):
     """
     Temperature converter:
@@ -30,3 +33,11 @@ def remove_bot_name(names, text):
         if name in text:
             text = text.replace(name, '')
     return text
+
+
+def get_UNIX_datetime(UNIX_ID):
+    return (
+        datetime.datetime.fromtimestamp(
+            int(UNIX_ID)
+        ).strftime('%Y-%m-%d %H:%M:%S')
+    )

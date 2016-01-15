@@ -119,7 +119,7 @@ bot_names = [
 ]
 
 
-def call_bot(names, text):
+def verify_text(names, text):
     return [name for name in names if name in text]
 
 
@@ -141,7 +141,7 @@ def handle(msg):
 
     print 'Got command: %s' % command
 
-    names_to_check = call_bot(bot_names, command)
+    names_to_check = verify_text(bot_names, command)
     print names_to_check
 
     if names_to_check:
@@ -225,8 +225,12 @@ def handle(msg):
         else:
             ed_response = get_ed_reply(command)
             bot.sendMessage(chat_id, ed_response)
-    elif command.lower() in 'kkk'*15:
-            bot.sendMessage(chat_id, "kkkk")
+    elif verify_text(command.lower().split(), 'kkk'*15):
+            msgs = [
+                'hahaha',
+                'kkkk',
+            ]
+            bot.sendMessage(chat_id, random.choice(msgs))
 
 
 bot = telepot.Bot('142375463:AAFf1mMbT1O3rxOCaQ8j0hzdU_Hc5Wh4kj0')
