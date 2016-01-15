@@ -17,7 +17,7 @@ import pickledb
 from external.ed import get_ed_reply
 from utils.utils import utf8_encode, remove_bot_name
 from utils.emoji import Emoji, get_all_emojis
-from jobs import good_night_cron_job
+from jobs import good_night_cron_job, its_friday
 # from jobs import job
 
 __author__ = "Alexsander Falcucci"
@@ -255,6 +255,7 @@ bot = telepot.Bot(db.get('TOKEN'))
 bot.notifyOnMessage(handle)
 print 'I am listening ...'
 
+schedule.every().day.at("18:45").do(its_friday.job, bot)
 schedule.every().day.at("00:00").do(good_night_cron_job.job, bot)
 while 1:
     schedule.run_pending()
