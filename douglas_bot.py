@@ -163,17 +163,19 @@ def handle(msg):
                 chat_id, "É dia de você calar essa boca. \n\nBrincadeira, hoje é dia {day} de {month} \U0001f605".format(day=day, month=month))
         elif command == 'bem vindo!':
             if welcome_count < 1:
-                msg_wel = "Eu sempre estive aqui, idiota! \U0001f610"
+                msg_wel = "Eu sempre estive aqui, idiota! {}".format(Emoji.NEUTRAL_FACE)
             elif welcome_count == 1:
-                msg_wel = "Não repito. \U0001f48b"
+                msg_wel = "Não repito. {}".format(Emoji.NEUTRAL_FACE)
             else:
-                msg_wel = "\U0001f610"
+                msg_wel = "{}".format(Emoji.NEUTRAL_FACE)
             bot.sendMessage(chat_id, msg_wel)
             globals()['welcome_count'] += 1
             print globals()['welcome_count']
         elif command.lower() in love_words:
             msgs = [
-                "Eu tambem amo vc, {} \u2764\ufe0f".format(name),
+                "Eu tambem amo vc, {}! {}{}".format(name,
+                                                    Emoji.BLACK_HEART_SUIT,
+                                                    Emoji.BLACK_HEART_SUIT),
                 "Legal.",
             ]
             msg = random.choice(msgs)
@@ -189,7 +191,7 @@ def handle(msg):
             bot.sendChatAction(chat_id, 'upload_document')
             bot.sendDocument(chat_id, "BQADAQADEwADnqxzCGp0fqkzsPC6Ag")
         elif command.lower() == 'nós te amamos!':
-            msg = "Eu amo todos vocês! \u2764\ufe0f"
+            msg = "Ah é?! Foda-se."
             bot.sendMessage(chat_id, msg)
             bot.sendChatAction(chat_id, 'upload_document')
             bot.sendDocument(chat_id, "BQADBAADYwMAAiUcZAe1DjlP-IMGhQI")
@@ -219,13 +221,6 @@ def handle(msg):
             bot.sendMessage(chat_id, random.choice(msg))
             # bot.sendChatAction(chat_id, 'upload_document')
             # bot.sendDocument(chat_id, "BQADBAADdwMAAgMdZAdPtWmOPGN1IQI")
-        elif len(command.split()) == 4 and command.split()[2] in ops.keys():
-            """
-            please refactor with it: http://stackoverflow.com/questions/1740726/python-turn-string-into-operator
-            """
-            parse = command.split()
-            op = parse.pop(2)
-            bot.sendMessage(chat_id, '\xae: {}'.format(ops[op](float(parse[1]), float(parse[2]))))
         else:
             ed_response = get_ed_reply(command)
 
