@@ -1,4 +1,5 @@
 import datetime
+import ast
 
 
 class Temperature(object):
@@ -41,3 +42,7 @@ def get_UNIX_datetime(UNIX_ID):
             int(UNIX_ID)
         ).strftime('%Y-%m-%d %H:%M:%S')
     )
+
+
+def convert_str_to_dict(string):
+    return ast.literal_eval(string)

@@ -15,4 +15,3 @@ def job(bot):
         'BQADBAADuwMAAj8bZAfJzPzXdPh7jwI',
     ]
     bot.sendDocument("-58208727", random.choice(gifs))
-    bot.sendDocument("-58208727", random.choice(gifs))
