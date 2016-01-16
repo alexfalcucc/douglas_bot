@@ -128,6 +128,17 @@ def handle(msg):
             bot.sendMessage(chat_id, random.choice(msg))
             # bot.sendChatAction(chat_id, 'upload_document')
             # bot.sendDocument(chat_id, "BQADBAADdwMAAgMdZAdPtWmOPGN1IQI")
+        elif verify_text(command.lower().split(), 'trans'):
+            msg = command.lower().replace('trans ', '')
+            if msg.split()[0] == 'pt':
+                msg = msg.replace("pt ", "", 1)
+                print msg
+                os.system('echo "{}" | trans -b -o ~/output.txt :pt'.format(msg))
+            else:
+                os.system('echo "{}" | trans -b -o ~/output.txt :en'.format(msg))
+            with open(os.environ['HOME'] + '/output.txt', 'r') as content_file:
+                content = content_file.read()
+            bot.sendMessage(chat_id, content)
         else:
             cnt_ed = count_ed_mgs(db)
             cnt_simsimi = count_simsimi_msg(db)
