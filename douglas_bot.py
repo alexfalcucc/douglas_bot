@@ -18,6 +18,7 @@ from external.simsimi import get_simsimi_reply, count_simsimi_msg
 from utils.utils import utf8_encode, remove_bot_name, verify_text
 from utils.emoji import Emoji, get_all_emojis
 from jobs import good_night_cron_job, its_friday
+from external.currencies_quote import get_current_quote
 from utils.word_keys import *
 # from jobs import job
 
@@ -135,6 +136,13 @@ def handle(msg):
             with open(os.environ['HOME'] + '/output.txt', 'r') as content_file:
                 content = content_file.read()
             bot.sendMessage(chat_id, content)
+        elif command == 'cotação':
+            quotes, status = get_current_quote()
+            dolar_value, euro_value = round(float(quotes.get('dolar').get('cotacao'))), round(float(quotes.get('euro').get('cotacao')))
+            msg = """
+            Dólar: {dolar}\nEuro: {euro},
+            """.format(dolar=dolar_value, euro=euro_value)
+            bot.sendMessage(chat_id, msg)
         else:
             cnt_ed = count_ed_mgs(db)
             cnt_simsimi = count_simsimi_msg(db)
