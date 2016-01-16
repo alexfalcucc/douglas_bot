@@ -11,7 +11,6 @@ import random
 import datetime
 import telepot
 import calendar
-import operator
 import schedule
 import pickledb
 from external.ed import get_ed_reply, count_ed_mgs
@@ -19,6 +18,7 @@ from external.simsimi import get_simsimi_reply, count_simsimi_msg
 from utils.utils import utf8_encode, remove_bot_name
 from utils.emoji import Emoji, get_all_emojis
 from jobs import good_night_cron_job, its_friday
+from utils.word_keys import *
 # from jobs import job
 
 __author__ = "Alexsander Falcucci"
@@ -28,100 +28,6 @@ __license__ = "MIT"
 
 
 db = pickledb.load(os.environ['HOME'] + '/douglas_db/douglas.db', True)
-
-
-morning_words = [
-    'morning!',
-    'morning',
-    'good morning!',
-    'good morning',
-    'bom dia',
-    'bom dia!',
-]
-
-night_words = [
-    'night!',
-    'night',
-    'good night!',
-    'good night',
-    'boa noite!',
-    'boa noite',
-]
-
-fuck_words = [
-    'fuck!',
-    'fuck',
-    'fuck you!',
-    'fuck you',
-    'fuck yourself!',
-    'fuck yourself',
-    'fuck u!',
-    'fuck u',
-    'vai se fuder',
-    'vai se fuder!',
-    'foda-se',
-    'foda-se!',
-    'vsf',
-]
-
-love_words = [
-    'eu te amo!',
-    'eu te amo',
-    'te amo!',
-    'te amo',
-    'i love you',
-    'i love you!',
-    'i lov you',
-    'i lov you!',
-    'lov u',
-    'lov u!',
-    'i lov u',
-    'i lov u!'
-]
-
-months = {
-    'January': 'Janeiro',
-    'February': 'Fevereiro',
-    'March': 'Março',
-    'April': 'Abril',
-    'May': 'Maio',
-    'June': 'Junho',
-    'July': 'Julho',
-    'August': 'Agosto',
-    'September': 'Setembro',
-    'October': 'Outubro',
-    'November': 'Novembro',
-    'December': 'Dezembro'
-}
-
-ops = {
-    '+': operator.add,
-    '-': operator.sub,
-    '*': operator.mul,
-    '/': operator.div,
-}
-
-welcome_count = 0
-
-bot_names = [
-    ', dog',
-    'dog, ',
-    ' dog,',
-    'dog,',
-    ' dogão',
-    'dogão ',
-    'doguinha',
-    ' doguinha',
-    'doguinha ',
-    ' dog',
-    'dog ',
-    ' rei',
-    'rei ',
-    ' mestre',
-    'mestre ',
-    '@doguinha_bot ',
-    ' @doguinha_bot',
-]
 
 
 def verify_text(names, text):
