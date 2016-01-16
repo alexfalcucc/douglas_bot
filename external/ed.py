@@ -27,6 +27,9 @@ def get_ed_reply(text):
 
 
 def count_ed_mgs(db):
+    """
+    Just return how many times Ed answered.
+    """
     try:
         count = db.get('ed_info')['qty_answed_message']
     except:
