@@ -23,7 +23,7 @@ def get_ed_reply(text):
     reply_text = pattern.sub(" ", text)
     if status != 200 or '408 Request Timeout' in reply_text:
         reply_text = "Desculpe, não entendi."
-    return reply_text, status, name
+    return reply_text.lower(), status, name
 
 
 def count_ed_mgs(db):
