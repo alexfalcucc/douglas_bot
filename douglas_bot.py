@@ -15,7 +15,7 @@ import schedule
 import pickledb
 from external.ed import get_ed_reply, count_ed_mgs
 from external.simsimi import get_simsimi_reply, count_simsimi_msg
-from utils.utils import utf8_encode, remove_bot_name
+from utils.utils import utf8_encode, remove_bot_name, verify_text
 from utils.emoji import Emoji, get_all_emojis
 from jobs import good_night_cron_job, its_friday
 from utils.word_keys import *
@@ -28,10 +28,6 @@ __license__ = "MIT"
 
 
 db = pickledb.load(os.environ['HOME'] + '/douglas_db/douglas.db', True)
-
-
-def verify_text(names, text):
-    return [name for name in names if name in text]
 
 
 def handle(msg):

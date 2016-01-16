@@ -29,6 +29,10 @@ def utf8_encode(string):
     return string.encode('utf-8')
 
 
+def verify_text(names, text):
+    return [name for name in names if name in text]
+
+
 def remove_bot_name(names, text):
     for name in names:
         if name in text:
