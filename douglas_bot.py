@@ -14,7 +14,8 @@ import calendar
 import operator
 import schedule
 import pickledb 
-from external.ed import get_ed_reply
+from external.ed import get_ed_reply, count_ed_mgs
+from external.simsimi import get_simsimi_reply, count_simsimi_msg
 from utils.utils import utf8_encode, remove_bot_name
 from utils.emoji import Emoji, get_all_emojis
 from jobs import good_night_cron_job, its_friday
@@ -222,22 +223,45 @@ def handle(msg):
             # bot.sendChatAction(chat_id, 'upload_document')
             # bot.sendDocument(chat_id, "BQADBAADdwMAAgMdZAdPtWmOPGN1IQI")
         else:
-            ed_response = get_ed_reply(command)
+            cnt_ed = count_ed_mgs(db)
+            cnt_simsimi = count_simsimi_msg(db)
+            if cnt_ed < 3:
+                response, sim_status, robot_name = get_ed_reply(command)
+            elif cnt_simsimi < 3:
+                response, sim_status, robot_name = get_simsimi_reply(command)
+            else:
+                response, ed_status, robot_name = get_ed_reply(command)
+                if ed_status != 200:
+                    response, sim_status, robot_name = get_simsimi_reply(command)
+                q = {'qty_answed_message': 0}
+                db.set('ed_info', q)
+                db.set('simsimi_info', q)
+                db.dump()
 
-            if verify_text(['Fui criado e program', 'O meu inventor'], ed_response):
+            if verify_text(['Fui criado e program', 'O meu inventor'], response):
                 developed_by_texts = db.get('developed_by')
                 olds = [utf8_encode(text) for text in developed_by_texts['old']]
                 news = [utf8_encode(text) for text in developed_by_texts['new']]
-                if 'Fui criado e program' in ed_response:
-                    ed_response = ed_response.replace(
+                if 'Fui criado e program' in response:
+                    response = response.replace(
                             olds[0],
                             news[0])
-                    ed_response += ' {}'.format(Emoji.GRINNING_FACE)
-                if 'O meu inventor' in ed_response:
-                    ed_response = ed_response.replace(
+                    response += ' {}'.format(Emoji.GRINNING_FACE)
+                if 'O meu inventor' in response:
+                    response = response.replace(
                             olds[1],
                             news[1])
-            bot.sendMessage(chat_id, ed_response)
+            info_sent = bot.sendMessage(chat_id, response)
+            if info_sent:
+                print robot_name
+                try:
+                    count_msg = db.get('{}_info'.format(robot_name))['qty_answed_message']
+                    count_msg += 1
+                except:
+                    count_msg = 0
+                q = {'qty_answed_message': count_msg}
+                db.set('{}_info'.format(robot_name), q)
+                db.dump()
     elif verify_text(command.lower().split(), 'kkk'*15):
             msgs = [
                 'hahaha',
@@ -250,7 +274,7 @@ bot = telepot.Bot(db.get('TOKEN'))
 bot.notifyOnMessage(handle)
 print 'I am listening ...'
 
-schedule.every().day.at("18:45").do(its_friday.job, bot)
+schedule.every().day.at("10:00").do(its_friday.job, bot)
 schedule.every().day.at("00:00").do(good_night_cron_job.job, bot)
 while 1:
     schedule.run_pending()
