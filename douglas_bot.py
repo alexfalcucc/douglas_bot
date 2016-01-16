@@ -149,7 +149,7 @@ def handle(msg):
     names_to_check = verify_text(bot_names, command)
     print names_to_check
 
-    if names_to_check:
+    if names_to_check or chat_type == 'private':
         command = remove_bot_name(names_to_check, command)
         print command
 
