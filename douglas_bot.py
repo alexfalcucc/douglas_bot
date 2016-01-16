@@ -13,7 +13,7 @@ import telepot
 import calendar
 import operator
 import schedule
-import pickledb 
+import pickledb
 from external.ed import get_ed_reply, count_ed_mgs
 from external.simsimi import get_simsimi_reply, count_simsimi_msg
 from utils.utils import utf8_encode, remove_bot_name
@@ -27,7 +27,7 @@ __maintainer__ = "Alexsander Falcucci"
 __license__ = "MIT"
 
 
-db = pickledb.load('douglas.db', True)
+db = pickledb.load(os.environ['HOME'] + '/douglas_db/douglas.db', True)
 
 
 morning_words = [
