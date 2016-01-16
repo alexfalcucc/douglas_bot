@@ -227,7 +227,7 @@ def handle(msg):
             cnt_simsimi = count_simsimi_msg(db)
             if cnt_ed < 1:
                 response, sim_status, robot_name = get_ed_reply(command)
-            elif cnt_simsimi < 1:
+            elif cnt_simsimi < 4:
                 response, sim_status, robot_name = get_simsimi_reply(command)
             else:
                 response, ed_status, robot_name = get_ed_reply(command)
