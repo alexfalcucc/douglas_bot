@@ -148,8 +148,10 @@ def handle(msg):
         else:
             cnt_ed = count_ed_mgs(db)
             cnt_simsimi = count_simsimi_msg(db)
-            limit_ed = 5 if chat_id == -58208727 else 1 if chat_id == -82861655 else 3
-            limit_simsimi = 2 if chat_id == -58208727 else 5 if chat_id == -82861655 else 3
+            sminino_group_id = -58208727
+            on_the_music_group_id = -82861655
+            limit_ed = 5 if chat_id == sminino_group_id else 1 if chat_id == on_the_music_group_id else 3
+            limit_simsimi = 2 if chat_id == sminino_group_id else 5 if chat_id == on_the_music_group_id else 3
             print 'limit_ed', limit_ed
             print 'limit_simsimi', limit_simsimi
             if cnt_ed < limit_ed:
