@@ -165,16 +165,16 @@ def handle(msg):
                 db.set('simsimi_info', q)
                 db.dump()
 
-            if verify_text(['fui criado e program', 'o meu inventor'], response):
+            if verify_text(['Fui criado e program', 'O meu inventor'], response):
                 developed_by_texts = db.get('developed_by')
                 olds = [utf8_encode(text) for text in developed_by_texts['old']]
                 news = [utf8_encode(text) for text in developed_by_texts['new']]
-                if 'fui criado e program' in response:
+                if 'Fui criado e program' in response:
                     response = response.replace(
                             olds[0],
                             news[0])
                     response += ' {}'.format(Emoji.GRINNING_FACE)
-                if 'o meu inventor' in response:
+                if 'O meu inventor' in response:
                     response = response.replace(
                             olds[1],
                             news[1])
