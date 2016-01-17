@@ -138,11 +138,12 @@ def handle(msg):
             bot.sendMessage(chat_id, content)
         elif command == 'cotação':
             quotes, status = get_current_quote()
-            dolar_value, euro_value = round(float(quotes.get('dolar').get('cotacao'))), round(float(quotes.get('euro').get('cotacao')))
+            dolar_value, euro_value = float(quotes.get('dolar').get('cotacao')), float(quotes.get('euro').get('cotacao'))
+            dolar_var, euro_var = quotes.get('dolar').get('variacao'), quotes.get('euro').get('variacao')
             msg = """
-            Dólar: {dolar}\nEuro: {euro},
-            """.format(dolar=dolar_value, euro=euro_value)
-            bot.sendMessage(chat_id, msg)
+            Dólar: R$ %.2f com variação de: R$ %s\nEuro: R$ %.2f com variação de: R$ %s
+            """ % (dolar_value, dolar_var, euro_value, euro_var)
+            bot.sendMessage(chat_id, msg.replace('.', ','))
         else:
             cnt_ed = count_ed_mgs(db)
             cnt_simsimi = count_simsimi_msg(db)
