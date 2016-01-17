@@ -23,12 +23,15 @@ def get_simsimi_reply(user_text):
     name = 'simsimi'
     text = r.data.strip()
     response_text = pattern.sub(" ", text)
-    dict_ = convert_str_to_dict(response_text)
-    reply_text = dict_.get('res').get('msg')
-    if 'I HAVE NO RESPONSE' in reply_text:
-        print 'I HAVE NO RESPONSE'
+    if response_text:
+        dict_ = convert_str_to_dict(response_text)
+        reply_text = dict_.get('res').get('msg')
+        if 'I HAVE NO RESPONSE' in reply_text:
+            print 'I HAVE NO RESPONSE'
+            reply_text, status, name = get_ed_reply(user_text)
+            print reply_text
+    else:
         reply_text, status, name = get_ed_reply(user_text)
-        print reply_text
     return reply_text, status, 'simsimi'
 
 
