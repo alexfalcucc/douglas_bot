@@ -5,7 +5,7 @@ import random
 
 def job(bot):
     print("Sending message...")
-    msg = "Boa noite à todos!"
+    msg = "Bora dormir seus bostas!"
     bot.sendMessage("-58208727", msg)
     bot.sendChatAction("-58208727", 'upload_document')
     gifs = [
