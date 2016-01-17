@@ -140,9 +140,10 @@ def handle(msg):
             quotes, status = get_current_quote()
             dolar_value, euro_value = float(quotes.get('dolar').get('cotacao')), float(quotes.get('euro').get('cotacao'))
             dolar_var, euro_var = quotes.get('dolar').get('variacao'), quotes.get('euro').get('variacao')
+            updated_at = quotes.get('atualizacao')
             msg = """
-            Dólar: R$ %.2f com variação de: R$ %s\nEuro: R$ %.2f com variação de: R$ %s
-            """ % (dolar_value, dolar_var, euro_value, euro_var)
+            Dólar: R$ %.2f (%s)\nEuro: R$ %.2f (%s)\nAtualizado em %shrs
+            """ % (dolar_value, dolar_var, euro_value, euro_var, updated_at.replace('\/', '-').replace('  -', 'às'))
             bot.sendMessage(chat_id, msg.replace('.', ','))
         else:
             cnt_ed = count_ed_mgs(db)
