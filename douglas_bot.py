@@ -148,9 +148,13 @@ def handle(msg):
         else:
             cnt_ed = count_ed_mgs(db)
             cnt_simsimi = count_simsimi_msg(db)
-            if cnt_ed < 2:
+            limit_ed = 5 if chat_id == -58208727 else 1 if chat_id == -82861655 else 3
+            limit_simsimi = 2 if chat_id == -58208727 else 5 if chat_id == -82861655 else 3
+            print 'limit_ed', limit_ed
+            print 'limit_simsimi', limit_simsimi
+            if cnt_ed < limit_ed:
                 response, sim_status, robot_name = get_ed_reply(command)
-            elif cnt_simsimi < 3:
+            elif cnt_simsimi < limit_simsimi:
                 response, sim_status, robot_name = get_simsimi_reply(command)
             else:
                 response, ed_status, robot_name = get_ed_reply(command)
