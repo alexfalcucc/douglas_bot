@@ -59,6 +59,7 @@ class QuoteCoffee(object):
         self.url = 'http://www.noticiasagricolas.com.br/cotacoes/cafe/cafe-arabica-mercado-fisico-tipo-6-duro'
 
     def run(self):
+        print "Updating..."
         browser = self.browser.get(self.url)
 
         latest_quote = browser.find('.cotacao tbody tr')
@@ -69,6 +70,7 @@ class QuoteCoffee(object):
             'quote_value': float(values.find('td')[1].text.replace(',', '.')),
             'rate': values.find('td')[2].text,
         }
+        print quote_query
         self.db.set('coffe_quote', quote_query)
         self.browser.close()
         self.display.stop()

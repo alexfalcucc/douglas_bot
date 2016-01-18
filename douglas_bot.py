@@ -21,8 +21,8 @@ from utils.utils import utf8_encode, remove_bot_name, verify_text
 from utils.emoji import Emoji, get_all_emojis
 from utils.word_keys import *
 from jobs import good_night_cron_job, its_friday
-from external.quote_coffee import QuoteCoffee
-from external.quotes import get_quotes
+# from external.quote_coffee import QuoteCoffee
+from external.quotes import get_quotes, QuoteCoffee
 from utils.handler_error import TlsSMTPHandler
 # from jobs import job
 
@@ -218,7 +218,7 @@ print 'I am listening ...'
 
 schedule.every().friday.at("10:00").do(its_friday.job, bot)
 schedule.every().day.at("00:00").do(good_night_cron_job.job, bot)
-schedule.every().day.at("13:10").do(QuoteCoffee(db).run)
+schedule.every().day.at("17:12").do(QuoteCoffee(db).run)
 while 1:
     schedule.run_pending()
     time.sleep(10)
