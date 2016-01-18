@@ -36,7 +36,7 @@ class QuoteCoffee(object):
         values = rows[0]
         quote_query = {
             'city': values.find('td')[0].text,
-            'quote_value': values.find('td')[1].text,
+            'quote_value': float(values.find('td')[1].text.replace(',', '.')),
             'rate': values.find('td')[2].text,
         }
         self.db.set('coffe_quote', quote_query)

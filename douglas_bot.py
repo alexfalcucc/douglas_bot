@@ -5,6 +5,7 @@ This it's the douglas_bot's first version. So, we have to refactor it to a class
 See more at: https://github.com/nickoala/telepot/blob/master/REFERENCE.md
 """
 import sys
+import re
 import os
 import time
 import random
@@ -141,11 +142,15 @@ def handle(msg):
             quotes, status = get_current_quote()
             dolar_value, euro_value = float(quotes.get('dolar').get('cotacao')), float(quotes.get('euro').get('cotacao'))
             dolar_var, euro_var = quotes.get('dolar').get('variacao'), quotes.get('euro').get('variacao')
+            quote_coffee = QuoteCoffee(db).get_quote()
             updated_at = quotes.get('atualizacao')
             msg = """
-            Dólar: R$ %.2f (%s)\nEuro: R$ %.2f (%s)\nAtualizado em %shrs
-            """ % (dolar_value, dolar_var, euro_value, euro_var, updated_at.replace('\/', '-').replace('  -', 'às'))
-            bot.sendMessage(chat_id, msg.replace('.', ','))
+            Dólar: R$ %.2f (%s)\nEuro: R$ %.2f (%s)\nCafé Arábica tipo 6 Sc 60kg: R$ %.2f (%s)\nAtualizado em %s hrs
+            """ % (dolar_value, dolar_var, euro_value, euro_var,
+                   quote_coffee.get('quote_value', ''),
+                   quote_coffee.get('rate', ''),
+                   updated_at.replace('\/', '-').replace('  -', 'às'),)
+            bot.sendMessage(chat_id, re.sub(' +', ' ', msg.replace('.', ',')))
         else:
             cnt_ed = count_ed_mgs(db)
             cnt_simsimi = count_simsimi_msg(db)
@@ -206,7 +211,7 @@ print 'I am listening ...'
 
 schedule.every().friday.at("10:00").do(its_friday.job, bot)
 schedule.every().day.at("00:00").do(good_night_cron_job.job, bot)
-schedule.every().day.at("13:10").do(QuoteCoffee().run, db)
+schedule.every().day.at("13:10").do(QuoteCoffee(db).run)
 while 1:
     schedule.run_pending()
     time.sleep(10)
