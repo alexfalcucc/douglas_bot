@@ -17,9 +17,10 @@ from external.ed import get_ed_reply, count_ed_mgs
 from external.simsimi import get_simsimi_reply, count_simsimi_msg
 from utils.utils import utf8_encode, remove_bot_name, verify_text
 from utils.emoji import Emoji, get_all_emojis
+from utils.word_keys import *
 from jobs import good_night_cron_job, its_friday
 from external.currencies_quote import get_current_quote
-from utils.word_keys import *
+from external.quote_coffee import QuoteCoffee
 # from jobs import job
 
 __author__ = "Alexsander Falcucci"
@@ -205,6 +206,7 @@ print 'I am listening ...'
 
 schedule.every().friday.at("10:00").do(its_friday.job, bot)
 schedule.every().day.at("00:00").do(good_night_cron_job.job, bot)
+schedule.every().day.at("01:21").do(QuoteCoffee().run)
 while 1:
     schedule.run_pending()
     time.sleep(10)
