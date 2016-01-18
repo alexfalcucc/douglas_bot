@@ -4,7 +4,6 @@
 This it's the douglas_bot's first version. So, we have to refactor it to a class skeleton.
 See more at: https://github.com/nickoala/telepot/blob/master/REFERENCE.md
 """
-import sys
 import re
 import os
 import time
@@ -22,8 +21,9 @@ from utils.utils import utf8_encode, remove_bot_name, verify_text
 from utils.emoji import Emoji, get_all_emojis
 from utils.word_keys import *
 from jobs import good_night_cron_job, its_friday
-from external.currencies_quote import get_current_quote
 from external.quote_coffee import QuoteCoffee
+from external.quotes import get_quotes
+from utils.handler_error import TlsSMTPHandler
 # from jobs import job
 
 __author__ = "Alexsander Falcucci"
@@ -31,52 +31,20 @@ __email__ = "alex.falcucci@gmail.com"
 __maintainer__ = "Alexsander Falcucci"
 __license__ = "MIT"
 
-
-class TlsSMTPHandler(logging.handlers.SMTPHandler):
-    def emit(self, record):
-        """
-        Emit a record.
- 
-        Format the record and send it to the specified addressees.
-        """
-        try:
-            import smtplib
-            import string # for tls add this line
-            try:
-                from email.utils import formatdate
-            except ImportError:
-                formatdate = self.date_time
-            port = self.mailport
-            if not port:
-                port = smtplib.SMTP_PORT
-            smtp = smtplib.SMTP(self.mailhost, port)
-            msg = self.format(record)
-            msg = "From: %s\r\nTo: %s\r\nSubject: %s\r\nDate: %s\r\n\r\n%s" % (
-                            self.fromaddr,
-                            string.join(self.toaddrs, ","),
-                            self.getSubject(record),
-                            formatdate(), msg)
-            if self.username:
-                smtp.ehlo() # for tls add this line
-                smtp.starttls() # for tls add this line
-                smtp.ehlo() # for tls add this line
-                smtp.login(self.username, self.password)
-            smtp.sendmail(self.fromaddr, self.toaddrs, msg)
-            smtp.quit()
-        except (KeyboardInterrupt, SystemExit):
-            raise
-        except:
-            self.handleError(record)
+db = pickledb.load(os.environ['HOME'] + '/douglas_db/douglas.db', True)
 
 logger = logging.getLogger()
 
-gm = TlsSMTPHandler(("smtp.gmail.com", 587), 'alex.falcucci@gmail.com', ['alex.falcucci@gmail.com'], 'Error found!', ('alex.falcucci@gmail.com', 'whdesign007'))
+email_info = db.get('email_info')
+
+gm = TlsSMTPHandler(("smtp.gmail.com", 587), email_info.get('email'),
+                    [email_info.get('email')], 'Error found!',
+                    (email_info.get('email'), email_info.get('password'))
+                    )
+
 gm.setLevel(logging.ERROR)
 
 logger.addHandler(gm)
-
-
-db = pickledb.load(os.environ['HOME'] + '/douglas_db/douglas.db', True)
 
 
 def handle(msg):
@@ -186,17 +154,7 @@ def handle(msg):
                     content = content_file.read()
                 bot.sendMessage(chat_id, content)
             elif command == 'cotação':
-                quotes, status = get_current_quote()
-                dolar_value, euro_value = float(quotes.get('dolar').get('cotacao')), float(quotes.get('euro').get('cotacao'))
-                dolar_var, euro_var = quotes.get('dolar').get('variacao'), quotes.get('euro').get('variacao')
-                quote_coffee = QuoteCoffee(db).get_quote()
-                updated_at = quotes.get('atualizacao')
-                msg = """
-                Dólar: R$ %.2f (%s)\nEuro: R$ %.2f (%s)\nCafé Arábica 6 Sc: R$ %.2f (%s)\nAtualizado em %s hrs
-                """ % (dolar_value, dolar_var, euro_value, euro_var,
-                       quote_coffee.get('quote_value', ''),
-                       quote_coffee.get('rate', ''),
-                       updated_at.replace('\/', '-').replace('  -', 'às'),)
+                msg = get_quotes(db, bot, chat_id)
                 bot.sendMessage(chat_id, re.sub(' +', ' ', msg.replace('.', ',')))
             else:
                 cnt_ed = count_ed_mgs(db)
