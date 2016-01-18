@@ -21,10 +21,8 @@ from utils.utils import utf8_encode, remove_bot_name, verify_text
 from utils.emoji import Emoji, get_all_emojis
 from utils.word_keys import *
 from jobs import good_night_cron_job, its_friday
-# from external.quote_coffee import QuoteCoffee
 from external.quotes import get_quotes, QuoteCoffee
 from utils.handler_error import TlsSMTPHandler
-# from jobs import job
 
 __author__ = "Alexsander Falcucci"
 __email__ = "alex.falcucci@gmail.com"
