@@ -209,6 +209,7 @@ def handle(msg):
                 ]
                 bot.sendMessage(chat_id, random.choice(msgs))
     except Exception as e:
+        print e
         logger.exception(e)
 
 
