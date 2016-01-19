@@ -223,7 +223,6 @@ print 'I am listening ...'
 schedule.every().friday.at("10:00").do(its_friday.job, bot)
 schedule.every().day.at("00:00").do(good_night_cron_job.job, bot)
 schedule.every().day.at("17:12").do(QuoteCoffee(db).run)
-schedule.every().hour.do(Joke(db).run)
 while 1:
     schedule.run_pending()
     time.sleep(10)
