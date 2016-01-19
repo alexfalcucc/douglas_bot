@@ -1,5 +1,6 @@
 import datetime
 import ast
+import random
 
 
 class Temperature(object):
@@ -54,3 +55,8 @@ def get_UNIX_datetime(UNIX_ID):
 
 def convert_str_to_dict(string):
     return ast.literal_eval(string)
+
+
+def my_shuffle(array):
+    random.shuffle(array)
+    return array

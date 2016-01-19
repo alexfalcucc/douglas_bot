@@ -17,7 +17,7 @@ import logging
 import logging.handlers
 from external.ed import get_ed_reply, count_ed_mgs
 from external.simsimi import get_simsimi_reply, count_simsimi_msg
-from utils.utils import utf8_encode, remove_bot_name, verify_text, equals_text
+from utils.utils import utf8_encode, remove_bot_name, verify_text, equals_text, my_shuffle
 from utils.emoji import Emoji, get_all_emojis
 from utils.word_keys import *
 from jobs import good_night_cron_job, its_friday
@@ -155,9 +155,10 @@ def handle(msg):
             elif command == 'cotação':
                 msg = get_quotes(db, bot, chat_id)
                 bot.sendMessage(chat_id, re.sub(' +', ' ', msg.replace('.', ',')))
+            # jokes
             elif equals_text(joke_words, command):
-                joke = Joke(db).get_jokes()
-                bot.sendMessage(chat_id, random.choice(joke))
+                jokes = my_shuffle(Joke(db).get_jokes())
+                bot.sendMessage(chat_id, random.choice(jokes))
             else:
                 cnt_ed = count_ed_mgs(db)
                 cnt_simsimi = count_simsimi_msg(db)
