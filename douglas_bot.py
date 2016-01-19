@@ -17,11 +17,12 @@ import logging
 import logging.handlers
 from external.ed import get_ed_reply, count_ed_mgs
 from external.simsimi import get_simsimi_reply, count_simsimi_msg
-from utils.utils import utf8_encode, remove_bot_name, verify_text
+from utils.utils import utf8_encode, remove_bot_name, verify_text, equals_text
 from utils.emoji import Emoji, get_all_emojis
 from utils.word_keys import *
 from jobs import good_night_cron_job, its_friday
 from external.quotes import get_quotes, QuoteCoffee
+from external.jokes import Joke
 from utils.handler_error import TlsSMTPHandler
 
 __author__ = "Alexsander Falcucci"
@@ -154,6 +155,9 @@ def handle(msg):
             elif command == 'cotação':
                 msg = get_quotes(db, bot, chat_id)
                 bot.sendMessage(chat_id, re.sub(' +', ' ', msg.replace('.', ',')))
+            elif equals_text(joke_words, command):
+                joke = Joke(db).get_jokes()
+                bot.sendMessage(chat_id, random.choice(joke))
             else:
                 cnt_ed = count_ed_mgs(db)
                 cnt_simsimi = count_simsimi_msg(db)
@@ -218,6 +222,7 @@ print 'I am listening ...'
 schedule.every().friday.at("10:00").do(its_friday.job, bot)
 schedule.every().day.at("00:00").do(good_night_cron_job.job, bot)
 schedule.every().day.at("17:12").do(QuoteCoffee(db).run)
+schedule.every().hour.do(Joke(db).run)
 while 1:
     schedule.run_pending()
     time.sleep(10)

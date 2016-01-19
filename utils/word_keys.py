@@ -3,6 +3,17 @@
 
 import operator
 
+joke_words = [
+    'piada',
+    'conta uma piada ai!',
+    'conta uma piada ai',
+    'conta uma piada aí!',
+    'conta uma piada aí',
+    'conta uma piada',
+    'conta uma piada?',
+    'pia'
+]
+
 
 morning_words = [
     'morning!',

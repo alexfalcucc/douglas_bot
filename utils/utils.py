@@ -33,6 +33,10 @@ def verify_text(names, text):
     return [name for name in names if name in text]
 
 
+def equals_text(names, text):
+    return [name for name in names if name == text]
+
+
 def remove_bot_name(names, text):
     for name in names:
         if name in text:
