@@ -12,7 +12,7 @@ from selenium import webdriver as old_webdriver
 
 class Joke(object):
 
-    """return the current quote coffe for the user"""
+    """return a joke for the user"""
 
     def __init__(self, db):
         self.db = db
