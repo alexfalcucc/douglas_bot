@@ -40,7 +40,7 @@ class Joke(object):
             for joke_element in driver.find('#main article').find('.row'):
                 try:
                     vote = joke_element.find('.votes').text.split()
-                    if int(vote[1]) >= 20:
+                    if int(vote[1]) >= 100:
                         jokes.append(joke_element.find('.joke').text)
                 except AttributeError:
                     print "I am not an element."

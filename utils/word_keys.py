@@ -17,7 +17,9 @@ joke_words = [
     'mais uma piada!',
     'mais uma piada',
     'conta mais uma piada!',
-    'conta mais uma piada'
+    'conta mais uma piada',
+    'conta uma piada melhor!',
+    'conta uma piada melhor'
 ]
 
 
