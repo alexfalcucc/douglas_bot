@@ -23,6 +23,7 @@ from utils.word_keys import *
 from jobs import good_night_cron_job, its_friday
 from external.quotes import get_quotes, QuoteCoffee
 from external.jokes import Joke
+from external.lyrics import get_lyrics
 from utils.handler_error import TlsSMTPHandler
 
 __author__ = "Alexsander Falcucci"
@@ -159,6 +160,9 @@ def handle(msg):
             elif equals_text(joke_words, command):
                 jokes = my_shuffle(Joke(db).get_jokes())
                 bot.sendMessage(chat_id, random.choice(jokes))
+            elif verify_text(command.split(), 'musica'):
+                lyrics, status = get_lyrics(command)
+                bot.sendMessage(chat_id, lyrics)
             else:
                 cnt_ed = count_ed_mgs(db)
                 cnt_simsimi = count_simsimi_msg(db)
