@@ -3,6 +3,16 @@
 
 import operator
 
+
+lyrics_words = [
+    'mus ',
+    'música ',
+    'musica ',
+    'song ',
+    'song',
+    'm ',
+]
+
 joke_words = [
     'piada',
     'conta uma piada ai!',
