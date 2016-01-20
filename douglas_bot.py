@@ -163,7 +163,7 @@ def handle(msg):
             elif verify_text(lyrics_words, command):
                 print verify_text(lyrics_words, command)
                 lyrics, status = get_lyrics(command)
-                bot.sendMessage(chat_id, lyrics)
+                bot.sendMessage(chat_id, lyrics, parse_mode='Markdown')
             else:
                 cnt_ed = count_ed_mgs(db)
                 cnt_simsimi = count_simsimi_msg(db)
