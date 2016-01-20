@@ -161,7 +161,6 @@ def handle(msg):
                 jokes = my_shuffle(Joke(db).get_jokes())
                 bot.sendMessage(chat_id, random.choice(jokes))
             elif verify_text(lyrics_words, command):
-                print verify_text(lyrics_words, command)
                 lyrics, status = get_lyrics(command)
                 bot.sendMessage(chat_id, lyrics, parse_mode='Markdown')
             else:
