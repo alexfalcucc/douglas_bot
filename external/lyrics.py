@@ -10,8 +10,10 @@ import json
 
 def get_lyrics(user_text):
     song_info = user_text.replace(user_text.split(' ')[0], '', 1).split('-')
-    lyrics, status = ("Não encontrei nada, tente algo parecido sem os sinais de chevron:\n\n"
+    lyrics, status = ("*Não encontrei mas tente algo parecido com o seguinte comando "
+                      "sem os sinais de chevron*:\n\n"
                       "`mestre m <artista> - <canção>`"), 404
+    # lyrics, status = '*bold* _italic_ [link](http://google.com).', 404
     if len(song_info) == 2:
         artist, song = urllib.quote_plus(song_info[0]), urllib.quote_plus(song_info[1])
         http = urllib3.PoolManager()
