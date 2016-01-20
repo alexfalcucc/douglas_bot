@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import random
+from utils.utils import my_shuffle
 
 
 def job(bot):
@@ -14,4 +15,5 @@ def job(bot):
         'BQADBAADSwMAAoQYZAevJ86wPaeRxwI',
         'BQADBAADuwMAAj8bZAfJzPzXdPh7jwI',
     ]
-    bot.sendDocument("-58208727", random.choice(gifs))
+    bot.sendDocument("-58208727", random.choice(my_shuffle(gifs)))
+    print 'Sent'
