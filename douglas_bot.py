@@ -20,7 +20,7 @@ from external.simsimi import get_simsimi_reply, count_simsimi_msg
 from utils.utils import utf8_encode, remove_bot_name, verify_text, equals_text, my_shuffle
 from utils.emoji import Emoji, get_all_emojis
 from utils.word_keys import *
-from jobs import good_night_cron_job, its_friday
+from jobs import good_night_cron_job, its_friday, good_morning
 from external.quotes import get_quotes, QuoteCoffee
 from external.jokes import Joke
 from external.lyrics import get_lyrics
@@ -226,6 +226,7 @@ print 'I am listening ...'
 
 schedule.every().friday.at("10:00").do(its_friday.job, bot)
 schedule.every().day.at("00:00").do(good_night_cron_job.job, bot)
+schedule.every().day.at("06:38").do(good_morning.job, bot)
 schedule.every().day.at("17:12").do(QuoteCoffee(db).run)
 while 1:
     schedule.run_pending()

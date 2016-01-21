@@ -17,6 +17,7 @@ def get_quotes(db, bot, chat_id):
     dolar_value, euro_value = float(coins_quotes.get('dolar').get('cotacao')), float(coins_quotes.get('euro').get('cotacao'))
     dolar_var, euro_var = coins_quotes.get('dolar').get('variacao'), coins_quotes.get('euro').get('variacao')
     updated_at = coins_quotes.get('atualizacao')
+    print updated_at
     quote_coffee = QuoteCoffee(db).get_quote_coffee()
     msg = """
     Dólar: R$ %.2f (%s)\nEuro: R$ %.2f (%s)\nCafé Arábica 6 Sc: R$ %.2f (%s)%s\nAtualizado em %s hrs
