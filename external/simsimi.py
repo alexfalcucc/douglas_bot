@@ -24,8 +24,12 @@ def get_simsimi_reply(user_text):
     text = r.data.strip()
     response_text = pattern.sub(" ", text)
     if response_text:
-        dict_ = convert_str_to_dict(response_text)
-        reply_text = dict_.get('res').get('msg')
+        try:
+            convert_str_to_dict(response_text)
+            dict_ = convert_str_to_dict(response_text)
+            reply_text = dict_.get('res').get('msg')
+        except SyntaxError:
+            reply_text, status, name = get_ed_reply(user_text)
         if 'I HAVE NO RESPONSE' in reply_text:
             print 'I HAVE NO RESPONSE'
             reply_text, status, name = get_ed_reply(user_text)
