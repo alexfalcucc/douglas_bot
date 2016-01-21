@@ -17,10 +17,11 @@ pattern = re.compile(u'<\/?\w+\s*[^>]*?\/?>', re.DOTALL | re.MULTILINE | re.IGNO
 
 def get_simsimi_reply(user_text):
     http = urllib3.PoolManager()
-    api_key = "0da76951-3f0d-49be-9be3-e014f658644b"
+    api_key1 = "0da76951-3f0d-49be-9be3-e014f658644b"
+    api_key2 = "63064370-b668-4dd7-a77a-22805fbe11e9"
     url = (
         "http://sandbox.api.simsimi.com/request.p"
-        "?key=" + api_key + "&lc=pt&ft=1.0&text=" + urllib.quote_plus(user_text)
+        "?key=" + api_key2 + "&lc=pt&ft=1.0&text=" + urllib.quote_plus(user_text)
     )
     r = http.request('GET', url)
     status = r.status
