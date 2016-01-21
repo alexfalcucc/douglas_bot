@@ -13,6 +13,7 @@ import telepot
 import calendar
 import schedule
 import pickledb
+import eatiht.v2 as v2
 import logging
 import logging.handlers
 from external.ed import get_ed_reply, count_ed_mgs
@@ -163,6 +164,10 @@ def handle(msg):
             elif verify_text(lyrics_words, command):
                 lyrics, status = get_lyrics(command)
                 bot.sendMessage(chat_id, lyrics, parse_mode='Markdown')
+            elif verify_text('-text', command):
+                url = command.split()[1]
+                msg = v2.extract(url)
+                bot.sendMessage(chat_id, msg)
             else:
                 cnt_ed = count_ed_mgs(db)
                 cnt_simsimi = count_simsimi_msg(db)

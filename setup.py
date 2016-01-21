@@ -11,6 +11,7 @@ requires = [
     'pickledb',
     'pyvirtualdisplay',
     'webdriverplus',
+    'eatiht',
     ]
 
 setup(name='douglas_bot',
