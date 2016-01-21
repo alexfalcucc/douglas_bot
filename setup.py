@@ -9,6 +9,8 @@ requires = [
     'schedule',
     'telepot',
     'pickledb',
+    'pyvirtualdisplay',
+    'webdriverplus',
     ]
 
 setup(name='douglas_bot',
