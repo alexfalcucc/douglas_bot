@@ -4,6 +4,12 @@
 import operator
 
 
+extractor_words = [
+    '--text ',
+    '-text ',
+    '-t ',
+]
+
 lyrics_words = [
     'mus ',
     'música ',
