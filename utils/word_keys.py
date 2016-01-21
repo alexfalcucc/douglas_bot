@@ -4,6 +4,14 @@
 import operator
 
 
+quote_words = [
+    '-cot',
+    'cotação',
+    'cotaçao',
+    'cotacao',
+]
+
+
 extractor_words = [
     '--text ',
     '-text ',

@@ -155,7 +155,7 @@ def handle(msg):
                 with open(os.environ['HOME'] + '/output.txt', 'r') as content_file:
                     content = content_file.read()
                 bot.sendMessage(chat_id, content)
-            elif command == 'cotação':
+            elif equals_text(quote_words, command):
                 msg = get_quotes(db, bot, chat_id)
                 bot.sendMessage(chat_id, re.sub(' +', ' ', msg.replace('.', ',')))
             # jokes
