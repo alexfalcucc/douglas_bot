@@ -16,7 +16,7 @@ lyrics_words = [
     'musica ',
     'song ',
     'song',
-    'm ',
+    '-m ',
 ]
 
 joke_words = [
