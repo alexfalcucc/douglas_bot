@@ -26,6 +26,7 @@ from external.quotes import get_quotes, QuoteCoffee
 from external.jokes import Joke
 from external.lyrics import get_lyrics
 from utils.handler_error import TlsSMTPHandler
+from telepot import BadHTTPResponse
 
 __author__ = "Alexsander Falcucci"
 __email__ = "alex.falcucci@gmail.com"
@@ -167,8 +168,12 @@ def handle(msg):
             elif verify_text(extractor_words, command):
                 url = command.split()[1]
                 msg = v2.extract(url)
-                print utf8_encode(msg)
-                bot.sendMessage(chat_id, msg)
+                try:
+                    bot.sendMessage(chat_id, msg)
+                except BadHTTPResponse:
+                    msg = ("*Infelizmente o texto é muito grande e excedeu nosso limite."
+                           " Por favor tente extrair textos um pouco menores.*")
+                    bot.sendMessage(chat_id, msg, parse_mode='Markdown')
             else:
                 cnt_ed = count_ed_mgs(db)
                 cnt_simsimi = count_simsimi_msg(db)
