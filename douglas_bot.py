@@ -180,7 +180,8 @@ def handle(msg):
                 sminino_group_id = -58208727
                 on_the_music_group_id = -82861655
                 los_primos_group_id = -16994629
-                fuck_list_group = [los_primos_group_id, on_the_music_group_id]
+                shit_group = -78912892
+                fuck_list_group = [los_primos_group_id, on_the_music_group_id, shit_group]
                 limit_ed = 5 if chat_id == sminino_group_id else 1 if chat_id in fuck_list_group else 3
                 limit_simsimi = 2 if chat_id == sminino_group_id else 8 if chat_id in fuck_list_group else 3
                 print 'limit_ed', limit_ed
