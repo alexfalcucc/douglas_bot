@@ -16,7 +16,7 @@ import pickledb
 import eatiht as v2
 import logging
 import logging.handlers
-from external.ed import reply, count_ed_mgs
+from external.ed import get_ed_reply, count_ed_mgs
 from external.simsimi import get_simsimi_reply, count_simsimi_msg
 from utils.utils import utf8_encode, remove_bot_name, verify_text, equals_text, my_shuffle
 from utils.emoji import Emoji, get_all_emojis
