@@ -12,7 +12,7 @@ import datetime
 import telepot
 import calendar
 import schedule
-import pickledb
+import pickledbu
 import eatiht as v2
 import logging
 import logging.handlers
@@ -241,7 +241,7 @@ print 'I am listening ...'
 schedule.every().friday.at("10:00").do(its_friday.job, bot)
 schedule.every().day.at("00:00").do(good_night_cron_job.job, bot)
 schedule.every().day.at("07:00").do(good_morning.job, bot)
-schedule.every().day.at("03:00").do(QuoteCoffee(db).run)
+# schedule.every().day.at("03:00").do(QuoteCoffee(db).run)
 while 1:
     schedule.run_pending()
     time.sleep(10)

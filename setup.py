@@ -15,7 +15,7 @@ requires = [
     'pyvirtualdisplay',
     'webdriverplus',
     'eatiht',
-    ]
+]
 
 setup(name='douglas_bot',
       version='0.0',
