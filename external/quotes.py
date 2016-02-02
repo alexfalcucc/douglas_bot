@@ -4,29 +4,35 @@ import urllib3
 import webdriverplus as webdriver
 import os
 import pickledb
+import json
 # simulate GUI
 from pyvirtualdisplay import Display
 # need selenium webdriver to set the firefoxprofile
 from selenium import webdriver as old_webdriver
 # webdriverplus is a fork of selenium2 webdriver with added features
-from utils.utils import convert_str_to_dict
+from utils.utils import utf8_encode
 
 
 def get_quotes(db, bot, chat_id):
     coins_quotes, status = get_current_quote()
     dolar_value, euro_value = float(coins_quotes.get('dolar').get('cotacao')), float(coins_quotes.get('euro').get('cotacao'))
-    dolar_var, euro_var = coins_quotes.get('dolar').get('variacao'), coins_quotes.get('euro').get('variacao')
-    updated_at = coins_quotes.get('atualizacao')
-    print updated_at
+    dolar_rate, euro_rate = coins_quotes.get('dolar').get('variacao'), coins_quotes.get('euro').get('variacao')
+    updated_at = utf8_encode(coins_quotes.get('atualizacao'))
     quote_coffee = QuoteCoffee(db).get_quote_coffee()
+    values = {
+        'dolar': dolar_value,
+        'dolar_rate': dolar_rate,
+        'euro_value': euro_value,
+        'euro_rate': euro_rate,
+        'coffee_value': quote_coffee.get('quote_coffee', ''),
+        'quote_rate': quote_coffee.get('rate', ''),
+        'updated_at': updated_at
+    }
     msg = """
-    Dólar: R$ %.2f (%s)\nEuro: R$ %.2f (%s)\nCafé Arábica 6 Sc: R$ %.2f (%s)%s\nAtualizado em %s hrs
-    """ % (dolar_value, dolar_var, euro_value, euro_var,
-           quote_coffee.get('quote_value', ''),
-           quote_coffee.get('rate', ''),
-           '%',
-           updated_at.replace('\/', '-').replace('  -', 'às'),)
-    return msg
+        Dólar: R$ {dolar}({dolar_rate})\nEuro: R$ {euro_value}({euro_rate})\nCafé Arábica 6 sc: R$ {coffee_value}\nAtualizado em {updated_at} hrs
+    """
+    msg = msg.format(**values)
+    return msg.strip()
 
 
 def get_current_quote():
@@ -36,8 +42,7 @@ def get_current_quote():
     r = http.request('GET', url)
     status = r.status
     str_reponse = r.data.strip()
-    dict_reponse = convert_str_to_dict(str_reponse)
-    return dict_reponse, status
+    return json.loads(str_reponse), status
 
 
 class QuoteCoffee(object):

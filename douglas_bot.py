@@ -12,7 +12,7 @@ import datetime
 import telepot
 import calendar
 import schedule
-import pickledbu
+import pickledb
 import eatiht as v2
 import logging
 import logging.handlers
