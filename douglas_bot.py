@@ -5,7 +5,6 @@ This it's the douglas_bot's first version. So, we have to refactor it to a class
 See more at: https://github.com/nickoala/telepot/blob/master/REFERENCE.md
 """
 
-
 import re
 import os
 import time
